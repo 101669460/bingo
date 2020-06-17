@@ -14,12 +14,11 @@ namespace bingo
             int d = 0;
             
             
-            //intro, ask for an upper limit, assign that upper limit to an array
+            //intro, ask for an upper limit, assign that upper limit and create a list
             Console.WriteLine("Welcome to this fun game of Bingo! To begin, enter the upper limit of numbers to be drawn.");
             int x = Convert.ToInt32(Console.ReadLine());
             x++;
-            int[] numbers;
-            numbers = new int[] {0};
+            List<int> numbers = new List<int>();
 
             
             //Check that it is larger than 0
@@ -54,18 +53,18 @@ namespace bingo
             //Draw next number
                 if(menu == 1){                   
                 //Create random number and check if it's already been used
-                    currentnumber = rnd.Next(0, x);
+                    currentnumber = rnd.Next(1, x);
                     if(d == (x-1)){
                         Console.WriteLine("All the numbers have been drawn!");
                         Console.WriteLine("");
                     }
                     else{
                         while(numbers.Contains(currentnumber)){
-                        currentnumber = rnd.Next(0, x);
+                        currentnumber = rnd.Next(1, x);
                         }
-                    //New number is placed into next position in array, then announced
+                    //New number is placed into next position in list, then announced
                         d++;
-                        numbers[d] = currentnumber;
+                        numbers.Add(currentnumber);
                         
                         Console.WriteLine("The number drawn is " + currentnumber + "!");
                         Console.WriteLine("");
@@ -81,14 +80,15 @@ namespace bingo
                         Console.Write("Your Numbers: ");
                         
                         foreach(int i in numbers){
-                            Console.Write(i);
+                            Console.Write(i + ", ");
                         }
                     }
                     if(menu2 == 2){
-                        Array.Sort(numbers);
+                        int[] numbersarray = numbers.ToArray();
+                        Array.Sort(numbersarray);
                         Console.Write("Your Numbers: ");
-                        foreach(int i in numbers){
-                            Console.Write(i);
+                        foreach(int i in numbersarray){
+                            Console.Write(i + ", ");
                         }
                     }
                     Console.WriteLine("");
